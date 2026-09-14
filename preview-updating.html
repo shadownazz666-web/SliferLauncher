@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Slifer — UPDATING preview</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500&display=swap");
+    :root {
+      --ink: #090b0d;
+      --teal-deep: #0e3b39;
+      --teal-mid: #1e6f6a;
+      --teal-hair: #4fa79c;
+      --gold: #d8a24a;
+      --gold-light: #f3cd82;
+      --text: #e9e4d8;
+    }
+    html, body { height: 100%; margin: 0; background: var(--ink); }
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      font-family: "Space Grotesk", system-ui, sans-serif;
+    }
+    .stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 22px;
+    }
+    .mark { width: 200px; height: 220px; overflow: visible; }
+    .glow {
+      animation: glow-pulse 4s ease-in-out infinite;
+      transform-origin: 100px 110px;
+    }
+    .gem {
+      animation: gem-breathe 2.6s ease-in-out infinite;
+      transform-origin: 100px 110px;
+    }
+    .facet { stroke: var(--teal-hair); stroke-width: 1; stroke-opacity: 0.45; }
+    .facet-a { fill: var(--teal-mid); }
+    .facet-b { fill: var(--teal-deep); }
+    .hex {
+      fill: none;
+      stroke: var(--gold);
+      stroke-width: 1.4;
+      stroke-opacity: 0.55;
+    }
+    .shard {
+      filter: drop-shadow(0 0 4px rgba(216, 162, 74, 0.55));
+      animation: shard-pulse 2.6s ease-in-out infinite;
+      transform-origin: 100px 40px;
+    }
+    .sheen {
+      mix-blend-mode: screen;
+      animation: sheen-sweep 3.4s ease-in-out infinite;
+    }
+    .ring {
+      animation: ring-spin 3.2s linear infinite;
+      transform-origin: 100px 110px;
+    }
+    .ring-arc {
+      fill: none;
+      stroke: var(--gold);
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-opacity: 0.85;
+    }
+    .label {
+      display: flex;
+      align-items: baseline;
+      gap: 2px;
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 0.28em;
+      color: var(--text);
+      opacity: 0.9;
+    }
+    .dot {
+      animation: dot-fade 1.4s ease-in-out infinite;
+      opacity: 0.2;
+      letter-spacing: 0;
+    }
+    .dot:nth-child(2) { animation-delay: 0.18s; }
+    .dot:nth-child(3) { animation-delay: 0.36s; }
+    .dot:nth-child(4) { animation-delay: 0.54s; }
+    @keyframes glow-pulse {
+      0%, 100% { opacity: 0.5; transform: scale(0.96); }
+      50% { opacity: 0.85; transform: scale(1.05); }
+    }
+    @keyframes gem-breathe {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+    }
+    @keyframes shard-pulse {
+      0%, 100% {
+        filter: drop-shadow(0 0 3px rgba(216, 162, 74, 0.45));
+        transform: scaleY(1);
+      }
+      50% {
+        filter: drop-shadow(0 0 9px rgba(243, 205, 130, 0.9));
+        transform: scaleY(1.06);
+      }
+    }
+    @keyframes sheen-sweep {
+      0% { transform: translateX(-140px) rotate(18deg); opacity: 0; }
+      12%, 45% { opacity: 0.8; }
+      60%, 100% { transform: translateX(140px) rotate(18deg); opacity: 0; }
+    }
+    @keyframes ring-spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes dot-fade {
+      0%, 80%, 100% { opacity: 0.2; }
+      40% { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="stage" role="status" aria-label="Updating">
+    <svg class="mark" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="glowGrad" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#D8A24A" stop-opacity="0.35" />
+          <stop offset="100%" stop-color="#D8A24A" stop-opacity="0" />
+        </radialGradient>
+        <linearGradient id="shardGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+          <stop offset="0%" stop-color="#D8A24A" />
+          <stop offset="100%" stop-color="#F3CD82" />
+        </linearGradient>
+        <linearGradient id="sheenGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#F3CD82" stop-opacity="0" />
+          <stop offset="50%" stop-color="#F3CD82" stop-opacity="0.5" />
+          <stop offset="100%" stop-color="#F3CD82" stop-opacity="0" />
+        </linearGradient>
+        <clipPath id="gemClip">
+          <polygon points="100,40 160.6,75 160.6,145 100,180 39.4,145 39.4,75" />
+          <polygon points="82,42 100,6 118,42" />
+        </clipPath>
+      </defs>
+      <circle class="glow" cx="100" cy="110" r="80" fill="url(#glowGrad)" />
+      <g class="ring">
+        <circle class="ring-arc" cx="100" cy="110" r="92" stroke-dasharray="260 318" />
+      </g>
+      <g class="gem">
+        <polygon class="facet facet-a" points="100,110 100,40 160.6,75" />
+        <polygon class="facet facet-b" points="100,110 160.6,75 160.6,145" />
+        <polygon class="facet facet-a" points="100,110 160.6,145 100,180" />
+        <polygon class="facet facet-b" points="100,110 100,180 39.4,145" />
+        <polygon class="facet facet-a" points="100,110 39.4,145 39.4,75" />
+        <polygon class="facet facet-b" points="100,110 39.4,75 100,40" />
+        <polygon class="hex" points="100,40 160.6,75 160.6,145 100,180 39.4,145 39.4,75" />
+        <polygon class="shard" points="82,42 100,6 118,42" fill="url(#shardGrad)" />
+        <g clip-path="url(#gemClip)">
+          <rect class="sheen" x="-20" y="-10" width="50" height="220" fill="url(#sheenGrad)" />
+        </g>
+      </g>
+    </svg>
+    <div class="label">
+      <span>UPDATING</span>
+      <span class="dot">.</span>
+      <span class="dot">.</span>
+      <span class="dot">.</span>
+    </div>
+  </div>
+</body>
+</html>

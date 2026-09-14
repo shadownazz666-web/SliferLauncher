@@ -1,0 +1,109 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Slifer Launcher",
+  "version": "0.1.0",
+  "identifier": "com.slifer.launcher",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://localhost:1420",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "main",
+        "title": "Slifer Launcher",
+        "width": 1360,
+        "height": 820,
+        "minWidth": 1024,
+        "minHeight": 680,
+        "center": true,
+        "resizable": true,
+        "maximizable": true,
+        "minimizable": true,
+        "closable": true,
+        "decorations": false,
+        "transparent": true,
+        "shadow": true,
+        "theme": "Dark",
+        "backgroundColor": "#00000000",
+        "windowEffects": {
+          "effects": ["micaDark", "acrylic", "blur"],
+          "color": "#07060A55"
+        }
+      }
+    ],
+    "security": {
+      "csp": null,
+      "assetProtocol": {
+        "enable": true,
+        "scope": [
+          "$HOME/AppData/Roaming/SliferLauncher/**",
+          "$APPDATA/SliferLauncher/**",
+          "$APPDATA/**"
+        ]
+      }
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["nsis"],
+    "createUpdaterArtifacts": true,
+    "publisher": "Shadownazz",
+    "copyright": "Copyright © 2026 Shadownazz. All rights reserved.",
+    "license": "LicenseRef-Slifer-Proprietary",
+    "licenseFile": "packaging/LICENSE.txt",
+    "homepage": "https://sliferlauncher.com",
+    "category": "Utility",
+    "shortDescription": "Slifer — a modern Windows game launcher",
+    "longDescription": "Scan installed stores, launch titles, customize your profile, and follow patch notes from a single Windows desktop app.",
+    "useLocalToolsDir": true,
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "windows": {
+      "digestAlgorithm": "sha256",
+      "webviewInstallMode": {
+        "type": "embedBootstrapper",
+        "silent": true
+      },
+      "nsis": {
+        "installMode": "currentUser",
+        "compression": "lzma",
+        "displayLanguageSelector": true,
+        "languages": [
+          "English",
+          "Spanish",
+          "French",
+          "German",
+          "PortugueseBR",
+          "Japanese",
+          "Korean",
+          "SimpChinese"
+        ],
+        "startMenuFolder": "Slifer",
+        "installerIcon": "icons/icon.ico",
+        "uninstallerIcon": "icons/icon.ico",
+        "headerImage": "packaging/nsis-header.bmp",
+        "sidebarImage": "packaging/nsis-sidebar.bmp"
+      }
+    }
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEYwNEY3OTZGQ0IzRDk3NjQKUldSa2x6M0xiM2xQOE1HdTMyZ09yMnJ4czVnWFNSZm1SV2lCdE8vTjFpTEpkRlNjNk54WUduNUwK",
+      "endpoints": [
+        "https://releases.sliferlauncher.com/{{target}}/{{arch}}/{{current_version}}",
+        "https://github.com/Shadownazz/slifer-launcher/releases/latest/download/latest.json"
+      ],
+      "windows": {
+        "installMode": "passive"
+      }
+    }
+  }
+}

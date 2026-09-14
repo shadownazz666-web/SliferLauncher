@@ -1,0 +1,17 @@
+SLIFER LAUNCHER END USER LICENSE AGREEMENT
+
+Copyright © 2026 Shadownazz. All rights reserved.
+
+This software is licensed, not sold. By installing Slifer Launcher you agree to the following terms.
+
+1. License. Shadownazz grants you a personal, non-exclusive, non-transferable license to install and use Slifer Launcher on Windows devices you own or control.
+
+2. Restrictions. You may not reverse engineer, redistribute, or sell the launcher except as allowed by applicable law. Game titles launched through Slifer remain subject to their own licenses and storefront terms.
+
+3. Privacy. Library metadata, artwork caches, and profile assets are stored locally on your machine. Optional Discord Rich Presence and artwork APIs send only the data those services require.
+
+4. Disclaimer. The software is provided "as is" without warranty of any kind. Shadownazz is not liable for lost saves, corrupted installs, or third-party storefront outages.
+
+5. Updates. The launcher may download and apply signed updates in the background when an update endpoint is configured.
+
+If you do not agree, cancel installation and remove any copied files.

@@ -1,0 +1,188 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500&display=swap");
+
+.updating-stage {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  background: #090b0d;
+}
+
+.updating-mark {
+  width: 200px;
+  height: 220px;
+  overflow: visible;
+}
+
+.updating-glow {
+  animation: updating-glow-pulse 4s ease-in-out infinite;
+  transform-origin: 100px 110px;
+}
+
+.updating-gem {
+  animation: updating-gem-breathe 2.6s ease-in-out infinite;
+  transform-origin: 100px 110px;
+}
+
+.updating-facet {
+  stroke: #4fa79c;
+  stroke-width: 1;
+  stroke-opacity: 0.45;
+}
+
+.updating-facet-a {
+  fill: #1e6f6a;
+}
+
+.updating-facet-b {
+  fill: #0e3b39;
+}
+
+.updating-hex {
+  fill: none;
+  stroke: #d8a24a;
+  stroke-width: 1.4;
+  stroke-opacity: 0.55;
+}
+
+.updating-shard {
+  filter: drop-shadow(0 0 4px rgba(216, 162, 74, 0.55));
+  animation: updating-shard-pulse 2.6s ease-in-out infinite;
+  transform-origin: 100px 40px;
+}
+
+.updating-sheen {
+  mix-blend-mode: screen;
+  animation: updating-sheen-sweep 3.4s ease-in-out infinite;
+}
+
+.updating-ring {
+  animation: updating-ring-spin 3.2s linear infinite;
+  transform-origin: 100px 110px;
+}
+
+.updating-ring-arc {
+  fill: none;
+  stroke: #d8a24a;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-opacity: 0.85;
+}
+
+.updating-label {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  font-family: "Space Grotesk", "Segoe UI Variable", "Segoe UI", system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.28em;
+  color: #e9e4d8;
+  opacity: 0.9;
+}
+
+.updating-dot {
+  animation: updating-dot-fade 1.4s ease-in-out infinite;
+  opacity: 0.2;
+  letter-spacing: 0;
+}
+
+.updating-dot:nth-child(2) {
+  animation-delay: 0.18s;
+}
+.updating-dot:nth-child(3) {
+  animation-delay: 0.36s;
+}
+.updating-dot:nth-child(4) {
+  animation-delay: 0.54s;
+}
+
+@keyframes updating-glow-pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(0.96);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes updating-gem-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+}
+
+@keyframes updating-shard-pulse {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 3px rgba(216, 162, 74, 0.45));
+    transform: scaleY(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 9px rgba(243, 205, 130, 0.9));
+    transform: scaleY(1.06);
+  }
+}
+
+@keyframes updating-sheen-sweep {
+  0% {
+    transform: translateX(-140px) rotate(18deg);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.8;
+  }
+  45% {
+    opacity: 0.8;
+  }
+  60% {
+    transform: translateX(140px) rotate(18deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(140px) rotate(18deg);
+    opacity: 0;
+  }
+}
+
+@keyframes updating-ring-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes updating-dot-fade {
+  0%,
+  80%,
+  100% {
+    opacity: 0.2;
+  }
+  40% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .updating-glow,
+  .updating-gem,
+  .updating-shard,
+  .updating-sheen,
+  .updating-ring,
+  .updating-dot {
+    animation: none !important;
+  }
+}
