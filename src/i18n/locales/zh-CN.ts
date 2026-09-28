@@ -4,6 +4,7 @@ import { en } from "@/i18n/locales/en";
 export const zhCN: Messages = {
   ...en,
   "nav.store": "商店",
+  "nav.cosmetics": "外观",
   "nav.library": "库",
   "nav.updates": "更新",
   "nav.notifications": "通知",

@@ -4,6 +4,7 @@ import { en } from "@/i18n/locales/en";
 export const ko: Messages = {
   ...en,
   "nav.store": "상점",
+  "nav.cosmetics": "코스메틱",
   "nav.library": "라이브러리",
   "nav.updates": "업데이트",
   "nav.notifications": "알림",

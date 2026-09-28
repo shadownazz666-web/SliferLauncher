@@ -37,8 +37,8 @@ export function WalletPage() {
               <span className="tabular-nums">{formatCoins(balance)}</span>
             </p>
             <p className="mt-2 text-[13px] text-muted">
-              Earn slowly by launching games and using Slifer. Spend Slifer Coins in the Store
-              when cosmetics unlock.
+              Earn slowly by launching games and using Slifer. Spend Slifer Coins in the Cosmetic
+              Store when cosmetics unlock.
             </p>
           </div>
         </div>
@@ -93,7 +93,7 @@ export function WalletPage() {
         <p className="text-[12px] leading-5 text-muted">
           +5.00 SC when you launch a game through Slifer (up to 3 times per day). +1.00 SC every
           20 minutes while Slifer stays open (up to 6 per day). Longer play sessions can grant a
-          little more when you quit — still capped daily so the Store stays meaningful.
+          little more when you quit — still capped daily so the Cosmetic Store stays meaningful.
         </p>
       </GlassPanel>
     </div>

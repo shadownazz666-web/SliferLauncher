@@ -4,6 +4,7 @@ import { en } from "@/i18n/locales/en";
 export const de: Messages = {
   ...en,
   "nav.store": "SHOP",
+  "nav.cosmetics": "KOSMETIK",
   "nav.library": "BIBLIOTHEK",
   "nav.updates": "UPDATES",
   "nav.notifications": "Benachrichtigungen",

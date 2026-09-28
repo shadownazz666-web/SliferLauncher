@@ -286,3 +286,43 @@ pub fn toggle_game_overlay(app: AppHandle) -> Result<bool, String> {
 pub fn hide_game_overlay(app: AppHandle) {
     crate::overlay::hide_overlay(&app);
 }
+
+#[tauri::command]
+pub fn itad_save_config(
+    app: AppHandle,
+    state: State<'_, crate::itad::ItadState>,
+    config: crate::models::ItadPublicConfig,
+) -> Result<(), String> {
+    crate::itad::save_config(app, state, config)
+}
+
+#[tauri::command]
+pub fn itad_get_session(state: State<'_, crate::itad::ItadState>) -> crate::models::ItadSessionView {
+    crate::itad::get_session(state)
+}
+
+#[tauri::command]
+pub async fn itad_begin_oauth(
+    app: AppHandle,
+    state: State<'_, crate::itad::ItadState>,
+    config: crate::models::ItadOAuthConfig,
+) -> Result<(), String> {
+    crate::itad::begin_oauth(app, state, config).await
+}
+
+#[tauri::command]
+pub async fn itad_refresh_token(
+    app: AppHandle,
+    state: State<'_, crate::itad::ItadState>,
+    config: crate::models::ItadOAuthConfig,
+) -> Result<crate::models::ItadSessionView, String> {
+    crate::itad::refresh_token(app, state, config).await
+}
+
+#[tauri::command]
+pub fn itad_logout(
+    app: AppHandle,
+    state: State<'_, crate::itad::ItadState>,
+) -> Result<(), String> {
+    crate::itad::logout(app, state)
+}

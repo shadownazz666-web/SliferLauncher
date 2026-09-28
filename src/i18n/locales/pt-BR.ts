@@ -4,6 +4,7 @@ import { en } from "@/i18n/locales/en";
 export const ptBR: Messages = {
   ...en,
   "nav.store": "LOJA",
+  "nav.cosmetics": "COSMÉTICOS",
   "nav.library": "BIBLIOTECA",
   "nav.updates": "ATUALIZAÇÕES",
   "nav.notifications": "Notificações",

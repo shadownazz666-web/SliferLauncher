@@ -15,6 +15,12 @@ dist-installer
 src-tauri/target
 src-tauri/keys/*.key
 
+# Secrets — never commit ITAD / OAuth credentials
+.env
+.env.*
+**/itad*.secrets*
+**/secrets.txt
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

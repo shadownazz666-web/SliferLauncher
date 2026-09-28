@@ -12,6 +12,7 @@ import { useSliferCoins } from "@/hooks/useSliferCoins";
 import { useUpdatesFeed } from "@/hooks/useUpdatesFeed";
 import { checkSilentUpdate } from "@/services/updater";
 import { useProfileStore } from "@/stores/profileStore";
+import { useItadAuthStore } from "@/stores/itadAuthStore";
 import { useUiStore } from "@/stores/uiStore";
 import { APP_ROUTES } from "@/types/navigation";
 
@@ -22,6 +23,7 @@ export function AppShell() {
   useUpdatesFeed();
   useCouchControls();
   const hydrateProfile = useProfileStore((state) => state.hydrate);
+  const hydrateItad = useItadAuthStore((state) => state.hydrate);
   const location = useLocation();
   const [maximized, setMaximized] = useState(false);
   const glass = useUiStore((state) => state.liquidGlassEnabled);
@@ -29,8 +31,9 @@ export function AppShell() {
 
   useEffect(() => {
     void hydrateProfile();
+    void hydrateItad();
     void checkSilentUpdate();
-  }, [hydrateProfile]);
+  }, [hydrateProfile, hydrateItad]);
 
   useEffect(() => {
     let disposed = false;

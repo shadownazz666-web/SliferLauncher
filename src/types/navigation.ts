@@ -1,5 +1,6 @@
 export const APP_ROUTES = {
   store: "/store",
+  cosmetics: "/cosmetics",
   library: "/library",
   updates: "/updates",
   profile: "/profile",

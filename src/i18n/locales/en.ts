@@ -2,6 +2,7 @@ import type { Messages } from "@/i18n/types";
 
 export const en: Messages = {
   "nav.store": "STORE",
+  "nav.cosmetics": "COSMETICS",
   "nav.library": "LIBRARY",
   "nav.updates": "UPDATES",
   "nav.notifications": "Notifications",

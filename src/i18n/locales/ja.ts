@@ -4,6 +4,7 @@ import { en } from "@/i18n/locales/en";
 export const ja: Messages = {
   ...en,
   "nav.store": "ストア",
+  "nav.cosmetics": "コスメ",
   "nav.library": "ライブラリ",
   "nav.updates": "アップデート",
   "nav.notifications": "通知",

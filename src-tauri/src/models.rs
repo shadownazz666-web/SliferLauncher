@@ -349,3 +349,30 @@ pub struct MediaItem {
     pub kind: String,
     pub created_at: i64,
 }
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ItadPublicConfig {
+    pub api_key: String,
+    pub client_id: String,
+    pub client_secret: String,
+    pub country: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ItadOAuthConfig {
+    pub client_id: String,
+    pub client_secret: String,
+    pub redirect_uri: String,
+    pub scopes: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ItadSessionView {
+    pub connected: bool,
+    pub access_token: Option<String>,
+    pub expires_at: Option<i64>,
+    pub username: Option<String>,
+}

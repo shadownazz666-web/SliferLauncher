@@ -85,7 +85,7 @@ export async function clearDiscordPresence(): Promise<void> {
 }
 
 export function browseContextFromPath(pathname: string): DiscordBrowseContext {
-  if (pathname.startsWith(APP_ROUTES.store)) {
+  if (pathname.startsWith(APP_ROUTES.store) || pathname.startsWith(APP_ROUTES.cosmetics)) {
     return "store";
   }
   if (pathname.startsWith(APP_ROUTES.updates)) {
