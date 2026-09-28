@@ -5,7 +5,6 @@ import { UpdatingScreen } from "@/components/UpdatingScreen";
 import { useThemeEngine } from "@/hooks/useThemeEngine";
 import { isFriendsWindow } from "@/lib/friendsWindow";
 import { isOverlayWindow } from "@/lib/overlayWindow";
-import { CosmeticStorePage } from "@/pages/CosmeticStorePage";
 import { FriendsWindowPage } from "@/pages/FriendsWindowPage";
 import { LibraryPage } from "@/pages/LibraryPage";
 import { OverlayPage } from "@/pages/OverlayPage";
@@ -62,7 +61,6 @@ export default function App() {
           <Route element={<AppShell />}>
             <Route index element={<Navigate to={APP_ROUTES.library} replace />} />
             <Route path={APP_ROUTES.store} element={<StorePage />} />
-            <Route path={APP_ROUTES.cosmetics} element={<CosmeticStorePage />} />
             <Route path={APP_ROUTES.library} element={<LibraryPage />} />
             <Route path={APP_ROUTES.updates} element={<UpdatesPage />} />
             <Route path={APP_ROUTES.profile} element={<ProfilePage />} />

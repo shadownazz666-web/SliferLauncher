@@ -28,7 +28,6 @@ export function Header() {
 
   const topNav = [
     { to: APP_ROUTES.store, label: t("nav.store") },
-    { to: APP_ROUTES.cosmetics, label: t("nav.cosmetics") },
     { to: APP_ROUTES.library, label: t("nav.library") },
     { to: APP_ROUTES.updates, label: t("nav.updates") },
     { to: APP_ROUTES.profile, label: username },

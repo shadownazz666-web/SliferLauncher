@@ -64,9 +64,10 @@
 
     },
 
-    "updater:default",
-    "deep-link:default"
+    "updater:default"
+
   ]
+
 }
 
 

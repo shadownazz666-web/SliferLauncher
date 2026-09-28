@@ -35,9 +35,4 @@ commands.allow = [
     "apply_window_effects",
     "toggle_game_overlay",
     "hide_game_overlay",
-    "itad_save_config",
-    "itad_get_session",
-    "itad_begin_oauth",
-    "itad_refresh_token",
-    "itad_logout",
 ]

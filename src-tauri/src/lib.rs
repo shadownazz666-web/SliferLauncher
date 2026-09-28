@@ -6,7 +6,6 @@ mod booster;
 mod achievements;
 mod media;
 mod http;
-mod itad;
 mod launch;
 mod models;
 mod overlay;
@@ -19,7 +18,6 @@ use tauri::{
     Manager,
     window::{Effect, EffectsBuilder},
 };
-use tauri_plugin_deep_link::DeepLinkExt;
 
 const WINDOW_EFFECTS: [Effect; 4] = [
     Effect::MicaDark,
@@ -56,7 +54,6 @@ pub fn run() {
         .plugin(tauri_plugin_opener::init())
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_updater::Builder::new().build())
-        .plugin(tauri_plugin_deep_link::init())
         .setup(|app| {
             let db = open_library_db(app.handle()).map_err(|error| {
                 std::io::Error::new(std::io::ErrorKind::Other, error)
@@ -64,36 +61,11 @@ pub fn run() {
             app.manage(db);
             app.manage(launch::SessionTracker::default());
             app.manage(discord::DiscordRpc::start());
-            app.manage(itad::ItadState::load(app.handle()));
 
             if let Some(window) = app.get_webview_window("main") {
                 apply_liquid_glass(&window);
             }
             overlay::start_hotkey_watcher(app.handle().clone());
-
-            #[cfg(desktop)]
-            {
-                if let Err(error) = app.deep_link().register("mylauncher") {
-                    eprintln!("deep-link register: {error}");
-                }
-            }
-
-            let handle = app.handle().clone();
-            app.deep_link().on_open_url(move |event| {
-                let urls = event.urls();
-                let app = handle.clone();
-                tauri::async_runtime::spawn(async move {
-                    let state = app.state::<itad::ItadState>();
-                    for url in urls {
-                        if let Err(error) =
-                            itad::handle_deep_link(app.clone(), state.inner(), url.as_str()).await
-                        {
-                            eprintln!("itad deep link: {error}");
-                        }
-                    }
-                });
-            });
-
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
@@ -130,11 +102,6 @@ pub fn run() {
             commands::apply_window_effects,
             commands::toggle_game_overlay,
             commands::hide_game_overlay,
-            commands::itad_save_config,
-            commands::itad_get_session,
-            commands::itad_begin_oauth,
-            commands::itad_refresh_token,
-            commands::itad_logout,
         ])
         .run(tauri::generate_context!())
         .expect("error while running Slifer");

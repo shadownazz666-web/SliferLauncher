@@ -1,14 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { GlassPanel } from "@/components/ui/GlassPanel";
 import { getMetadataConfig, setMetadataConfig } from "@/services/metadata";
 import { setBrowsingPresence } from "@/services/discord";
-import {
-  getItadConfig,
-  setItadConfig,
-  syncItadConfigToNative,
-} from "@/services/itad";
 import { useDiscordStore } from "@/stores/discordStore";
-import { useItadAuthStore } from "@/stores/itadAuthStore";
 import { useSetupStore } from "@/stores/setupStore";
 import { useUiStore } from "@/stores/uiStore";
 
@@ -31,36 +25,7 @@ export function SettingsPage() {
   const applyDiscord = useDiscordStore((state) => state.apply);
   const resetSetup = useSetupStore((state) => state.resetSetup);
   const [apiConfig, setApiConfig] = useState(getMetadataConfig);
-  const [itadConfig, setItadLocal] = useState(getItadConfig);
   const [resetting, setResetting] = useState(false);
-  const [savingItad, setSavingItad] = useState(false);
-
-  const itadConnected = useItadAuthStore((state) => state.connected);
-  const itadUsername = useItadAuthStore((state) => state.username);
-  const itadConnecting = useItadAuthStore((state) => state.connecting);
-  const connectItad = useItadAuthStore((state) => state.connect);
-  const disconnectItad = useItadAuthStore((state) => state.disconnect);
-  const hydrateItad = useItadAuthStore((state) => state.hydrate);
-
-  useEffect(() => {
-    void hydrateItad();
-  }, [hydrateItad]);
-
-  function updateItad(partial: Parameters<typeof setItadConfig>[0]) {
-    setItadLocal(setItadConfig(partial));
-  }
-
-  async function saveItadCredentials() {
-    setSavingItad(true);
-    try {
-      await syncItadConfigToNative();
-      flashToast("IsThereAnyDeal credentials saved");
-    } catch (error) {
-      flashToast(error instanceof Error ? error.message : "Could not save ITAD config");
-    } finally {
-      setSavingItad(false);
-    }
-  }
 
   return (
     <div className="mx-auto flex h-full max-w-3xl flex-col gap-4">
@@ -202,73 +167,6 @@ export function SettingsPage() {
             setApiConfig(setMetadataConfig({ igdbClientSecret }))
           }
         />
-      </GlassPanel>
-
-      <GlassPanel className="space-y-4 px-5 py-4">
-        <div>
-          <p className="text-sm font-medium">IsThereAnyDeal</p>
-          <p className="mt-1 text-sm leading-6 text-ivory/50">
-            Powers the Store deals, search, and price overview. Credentials stay on this machine
-            (%APPDATA%/SliferLauncher) and are never bundled with the app. Register an app at{" "}
-            <code className="text-ivory/70">isthereanydeal.com</code> with redirect{" "}
-            <code className="text-ivory/70">mylauncher://auth</code>.
-          </p>
-        </div>
-        <SecretField
-          label="API key"
-          value={itadConfig.apiKey}
-          onChange={(apiKey) => updateItad({ apiKey })}
-        />
-        <SecretField
-          label="OAuth client ID"
-          value={itadConfig.clientId}
-          onChange={(clientId) => updateItad({ clientId })}
-        />
-        <SecretField
-          label="OAuth client secret (optional for public clients)"
-          value={itadConfig.clientSecret}
-          onChange={(clientSecret) => updateItad({ clientSecret })}
-        />
-        <label className="block">
-          <span className="text-xs uppercase tracking-[0.16em] text-ivory/40">Country</span>
-          <input
-            type="text"
-            value={itadConfig.country}
-            maxLength={2}
-            onChange={(event) => updateItad({ country: event.target.value })}
-            placeholder="US"
-            autoComplete="off"
-            className="mt-2 h-10 w-full rounded-2xl border border-white/8 bg-black/20 px-3 text-sm uppercase outline-none focus:border-crimson/50"
-          />
-        </label>
-        <div className="flex flex-wrap gap-2">
-          <button
-            type="button"
-            disabled={savingItad}
-            onClick={() => void saveItadCredentials()}
-            className="rounded-2xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-ivory transition hover:bg-white/10 disabled:opacity-40"
-          >
-            {savingItad ? "Saving…" : "Save credentials"}
-          </button>
-          {itadConnected ? (
-            <button
-              type="button"
-              onClick={() => void disconnectItad()}
-              className="rounded-2xl border border-line px-4 py-2 text-sm text-ivory hover:bg-hover"
-            >
-              Disconnect{itadUsername ? ` (${itadUsername})` : ""}
-            </button>
-          ) : (
-            <button
-              type="button"
-              disabled={itadConnecting || !itadConfig.clientId.trim()}
-              onClick={() => void connectItad()}
-              className="rounded-2xl border border-accent/40 bg-accent/15 px-4 py-2 text-sm text-accent hover:bg-accent/25 disabled:opacity-40"
-            >
-              {itadConnecting ? "Opening browser…" : "Connect ITAD account"}
-            </button>
-          )}
-        </div>
       </GlassPanel>
 
       <GlassPanel className="space-y-3 px-5 py-4">

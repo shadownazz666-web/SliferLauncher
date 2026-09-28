@@ -1,6 +1,5 @@
 export type MessageKey =
   | "nav.store"
-  | "nav.cosmetics"
   | "nav.library"
   | "nav.updates"
   | "nav.notifications"

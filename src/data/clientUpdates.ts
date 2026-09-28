@@ -9,18 +9,6 @@ export interface ClientUpdateNote {
 /** Slifer client changelog — shown under Client Updates / megaphone. */
 export const CLIENT_UPDATES: ClientUpdateNote[] = [
   {
-    id: "0.1.4-itad-store",
-    version: "0.1.4",
-    date: "2026-09-28",
-    title: "Store deals & Cosmetic Store",
-    body: [
-      "Store now shows IsThereAnyDeal deals, search, and price overview",
-      "Link your ITAD account for owned/waitlist badges (OAuth via mylauncher://auth)",
-      "Profile cosmetics moved to a separate Cosmetic Store route",
-      "Add your ITAD API key and OAuth client ID under Settings",
-    ],
-  },
-  {
     id: "0.1.3-slifer-coins",
     version: "0.1.3",
     date: "2026-09-06",
