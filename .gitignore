@@ -15,9 +15,18 @@ dist-installer
 src-tauri/target
 src-tauri/keys/*.key
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
+# Store API local data / secrets
+store-api/.env
+store-api/data/
+
+# Launcher build-time env (keep .env.example)
+.env
+.env.production
+.env.development
+
+# Editor / AI tooling (local only — do not commit)
+.cursor/
+.vscode/
 .idea
 .DS_Store
 *.suo
