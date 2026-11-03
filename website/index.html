@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Slifer — Game Launcher</title>
+    <meta
+      name="description"
+      content="Slifer — a Windows game launcher made by gamers, for gamers. Library, store, friends, one place."
+    />
+    <meta property="og:title" content="Slifer — Game Launcher" />
+    <meta
+      property="og:description"
+      content="Made by gamers, for gamers. Grab the Windows launcher and play."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://sliferlauncher.com/" />
+    <meta property="og:image" content="https://sliferlauncher.com/assets/slifer-logo.png" />
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Rajdhani:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div id="y2k-bg" aria-hidden="true">
+      <canvas class="chrome"></canvas>
+      <div class="vignette"></div>
+      <canvas class="stars"></canvas>
+      <div class="grain"></div>
+    </div>
+
+    <div class="scroll-progress" aria-hidden="true">
+      <div class="scroll-progress__bar"></div>
+    </div>
+
+    <header class="top glass-chip" data-reveal>
+      <span class="top__mark">SLIFER</span>
+      <a class="top__link glass-text" href="#download">Download</a>
+    </header>
+
+    <main>
+      <section class="hero" id="top">
+        <div class="hero__orb" data-parallax="0.18" aria-hidden="true">
+          <div class="chrome-orb">
+            <div class="chrome-orb__sheen"></div>
+          </div>
+        </div>
+
+        <div class="hero__copy" data-reveal>
+          <p class="glass-kicker glass-text">✦ made by gamers · for gamers ✦</p>
+          <h1 class="hero__brand chrome-type">SLIFER</h1>
+          <p class="hero__pitch glass-text">
+            A little Windows launcher for your library, store, and friends — nothing corporate,
+            just something we wanted to play with.
+          </p>
+          <div class="hero__actions">
+            <a
+              class="cta cta-glow"
+              id="download"
+              href="https://github.com/shadownazz666-web/SliferLauncher/releases/latest/download/SliferLauncher_Setup.exe"
+            >
+              <span class="cta__label">Download for Windows</span>
+              <span class="cta__shine" aria-hidden="true"></span>
+            </a>
+            <p class="hero__aside glass-text">Got it already? Fire up the app.</p>
+          </div>
+          <a class="scroll-hint glass-text" href="#vibes" data-reveal>
+            <span>scroll</span>
+            <span class="scroll-hint__chevrons" aria-hidden="true">⌄⌄</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="band" id="vibes">
+        <div class="band__inner">
+          <article class="glass-panel" data-reveal data-parallax="0.08">
+            <h2 class="glass-heading chrome-type">Your games. One pad.</h2>
+            <p class="glass-text">
+              Scan what you’ve already got, launch from one place, hang with friends — built for
+              nights in, not boardrooms.
+            </p>
+          </article>
+
+          <div class="glass-row">
+            <article class="glass-panel glass-panel--sm" data-reveal data-parallax="0.1">
+              <h3 class="glass-heading chrome-type">Library</h3>
+              <p class="glass-text">Your titles, ready when you are.</p>
+            </article>
+            <article class="glass-panel glass-panel--sm" data-reveal data-parallax="0.12">
+              <h3 class="glass-heading chrome-type">Store</h3>
+              <p class="glass-text">Indie drops from people who ship games.</p>
+            </article>
+            <article class="glass-panel glass-panel--sm" data-reveal data-parallax="0.14">
+              <h3 class="glass-heading chrome-type">Friends</h3>
+              <p class="glass-text">See who’s on, chat, keep it simple.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="band band--end" id="get">
+        <div class="band__inner glass-panel glass-panel--cta" data-reveal data-parallax="0.06">
+          <h2 class="glass-heading chrome-type">Ready when you are.</h2>
+          <p class="glass-text">Windows setup. Free. No corp nonsense.</p>
+          <a
+            class="cta cta-glow"
+            href="https://github.com/shadownazz666-web/SliferLauncher/releases/latest/download/SliferLauncher_Setup.exe"
+          >
+            <span class="cta__label">Get Slifer</span>
+            <span class="cta__shine" aria-hidden="true"></span>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot glass-text">
+      <span>© <span id="year"></span> Slifer · made by gamers, for gamers</span>
+    </footer>
+
+    <script src="/y2k-bg.js"></script>
+    <script src="/site.js"></script>
+  </body>
+</html>
