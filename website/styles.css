@@ -278,18 +278,27 @@ body {
   position: absolute;
   top: calc(100% + 0.55rem);
   right: 0;
+  z-index: 50;
   width: max-content;
   min-width: 11.5rem;
   padding: 0.4rem;
   border-radius: 0.9rem;
-  display: flex;
+  display: none;
   flex-direction: column;
   gap: 0.15rem;
   transform: none;
 }
 
+.account-menu.is-open {
+  display: flex;
+}
+
 .account-menu[hidden] {
-  display: none;
+  display: none !important;
+}
+
+.account-menu.is-open:not([hidden]) {
+  display: flex !important;
 }
 
 .account-menu__email {

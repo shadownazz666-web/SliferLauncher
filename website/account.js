@@ -40,8 +40,13 @@
     el.textContent = message;
   }
 
+  function menuIsOpen() {
+    return Boolean(accountMenu?.classList.contains("is-open"));
+  }
+
   function closeMenu() {
     if (!accountMenu) return;
+    accountMenu.classList.remove("is-open");
     accountMenu.hidden = true;
     accountBtn.setAttribute("aria-expanded", "false");
   }
@@ -49,6 +54,7 @@
   function openMenu() {
     if (!accountMenu) return;
     accountMenu.hidden = false;
+    accountMenu.classList.add("is-open");
     accountBtn.setAttribute("aria-expanded", "true");
   }
 
@@ -159,19 +165,25 @@
   }
 
   accountBtn.addEventListener("click", (e) => {
+    e.preventDefault();
     e.stopPropagation();
     if (A.loadSession()) {
-      if (accountMenu?.hidden === false) closeMenu();
+      if (menuIsOpen()) closeMenu();
       else openMenu();
       return;
     }
     openOverlay("gate");
   });
 
-  accountMenu?.addEventListener("click", (e) => e.stopPropagation());
+  accountMenu?.addEventListener("click", (e) => {
+    // Keep menu open for in-menu controls; links navigate normally.
+    e.stopPropagation();
+  });
 
   document.querySelectorAll("[data-account-action]").forEach((btn) => {
-    btn.addEventListener("click", () => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
       const action = btn.getAttribute("data-account-action");
       if (action === "signout") {
         signOut();
@@ -204,7 +216,12 @@
       else closeMenu();
     }
   });
-  addEventListener("click", () => closeMenu());
+  // Ignore clicks inside the chip/menu so open isn't instantly closed.
+  addEventListener("click", (e) => {
+    const t = e.target;
+    if (t instanceof Element && t.closest(".account-wrap")) return;
+    closeMenu();
+  });
 
   tabs.forEach((tab) => {
     tab.addEventListener("click", () => {
