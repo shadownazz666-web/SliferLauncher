@@ -69,13 +69,27 @@
       </button>
 
       <div class="account-menu glass-panel" id="account-menu" role="menu" hidden>
-        <button type="button" class="account-menu__item" role="menuitem" data-account-action="profile">
-          View profile
-        </button>
+        <p class="account-menu__email" id="account-email" hidden></p>
+        <a class="account-menu__item" role="menuitem" href="/profile.html">View profile</a>
+        <a
+          class="account-menu__item"
+          role="menuitem"
+          href="https://github.com/shadownazz666-web/SliferLauncher/releases/latest/download/SliferLauncher_Setup.exe"
+        >
+          Download launcher
+        </a>
         <button type="button" class="account-menu__item" role="menuitem" data-account-action="password">
           Change password
         </button>
-        <button type="button" class="account-menu__item account-menu__item--danger" role="menuitem" data-account-action="signout">
+        <button type="button" class="account-menu__item" role="menuitem" data-account-action="forgot">
+          Forgot password
+        </button>
+        <button
+          type="button"
+          class="account-menu__item account-menu__item--danger"
+          role="menuitem"
+          data-account-action="signout"
+        >
           Sign out
         </button>
       </div>
@@ -102,9 +116,6 @@
             </button>
           </div>
           <h2 class="auth-modal__title chrome-type" id="auth-title">Sign in</h2>
-          <p class="auth-modal__hint glass-text">
-            Same account as the Slifer launcher.
-          </p>
 
           <form class="auth-form" id="auth-login" autocomplete="on">
             <label class="auth-field">
@@ -120,6 +131,7 @@
               <span class="cta__label">Sign in</span>
               <span class="cta__shine" aria-hidden="true"></span>
             </button>
+            <button type="button" class="auth-text-link" data-open-forgot>Forgot password</button>
           </form>
 
           <form class="auth-form" id="auth-register" hidden autocomplete="on">
@@ -143,27 +155,8 @@
           </form>
         </div>
 
-        <div id="auth-profile" hidden>
-          <h2 class="auth-modal__title chrome-type">Profile</h2>
-          <div class="profile-card">
-            <img class="profile-card__avatar" id="profile-avatar" alt="" hidden />
-            <span class="profile-card__fallback" id="profile-fallback" hidden aria-hidden="true"></span>
-            <div class="profile-card__meta">
-              <p class="profile-card__name" id="profile-name"></p>
-              <p class="profile-card__status glass-text" id="profile-status"></p>
-              <p class="profile-card__rep glass-text" id="profile-rep">Rep — coming soon</p>
-            </div>
-          </div>
-          <p class="auth-modal__hint glass-text">
-            Avatar and cosmetics stay in the launcher.
-          </p>
-        </div>
-
         <div id="auth-password" hidden>
           <h2 class="auth-modal__title chrome-type">Change password</h2>
-          <p class="auth-modal__hint glass-text">
-            Confirm with the email on this account.
-          </p>
           <form class="auth-form" id="auth-password-form" autocomplete="on">
             <label class="auth-field">
               <span>Email</span>
@@ -181,6 +174,40 @@
             <p class="auth-ok" id="password-ok" hidden></p>
             <button type="submit" class="cta cta-glow auth-submit">
               <span class="cta__label">Update password</span>
+              <span class="cta__shine" aria-hidden="true"></span>
+            </button>
+          </form>
+        </div>
+
+        <div id="auth-forgot" hidden>
+          <h2 class="auth-modal__title chrome-type">Forgot password</h2>
+          <p class="auth-error" id="forgot-error" hidden></p>
+          <p class="auth-ok" id="forgot-ok" hidden></p>
+          <form class="auth-form" id="auth-forgot-request" autocomplete="on">
+            <label class="auth-field">
+              <span>Email</span>
+              <input name="email" type="email" required autocomplete="email" />
+            </label>
+            <button type="submit" class="cta cta-glow auth-submit">
+              <span class="cta__label">Send code</span>
+              <span class="cta__shine" aria-hidden="true"></span>
+            </button>
+          </form>
+          <form class="auth-form" id="auth-forgot-reset" hidden autocomplete="on">
+            <label class="auth-field">
+              <span>Email</span>
+              <input name="email" type="email" required autocomplete="email" />
+            </label>
+            <label class="auth-field">
+              <span>Code</span>
+              <input name="code" type="text" required autocomplete="one-time-code" minlength="4" maxlength="12" />
+            </label>
+            <label class="auth-field">
+              <span>New password</span>
+              <input name="newPassword" type="password" required autocomplete="new-password" minlength="6" />
+            </label>
+            <button type="submit" class="cta cta-glow auth-submit">
+              <span class="cta__label">Reset password</span>
               <span class="cta__shine" aria-hidden="true"></span>
             </button>
           </form>
@@ -268,6 +295,8 @@
     </footer>
 
     <script src="/y2k-bg.js"></script>
+    <script src="/auth.js"></script>
+    <script src="/account.js"></script>
     <script src="/site.js"></script>
   </body>
 </html>

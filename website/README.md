@@ -1,6 +1,6 @@
 # sliferlauncher.com (landing)
 
-Static one-page site: brand + pitch + Windows download CTA + Account (register/login).
+Static site: landing + Account (register/login) + `/profile.html` full-page profile.
 
 Download target:
 

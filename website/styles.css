@@ -292,6 +292,22 @@ body {
   display: none;
 }
 
+.account-menu__email {
+  margin: 0 0 0.25rem;
+  padding: 0.45rem 0.75rem 0.55rem;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: var(--ice-dim);
+  word-break: break-all;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.account-menu__email[hidden] {
+  display: none;
+}
+
 .account-menu__item {
   appearance: none;
   border: 0;
@@ -303,10 +319,14 @@ body {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   text-align: left;
+  text-decoration: none;
   padding: 0.65rem 0.75rem;
   border-radius: 0.65rem;
   cursor: pointer;
   transition: background 0.15s ease, color 0.15s ease;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .account-menu__item:hover,
@@ -320,6 +340,11 @@ body {
 .account-menu__item--danger:focus-visible {
   background: rgba(255, 120, 150, 0.14);
   color: #ffb3c7;
+}
+
+.top__mark--link {
+  text-decoration: none;
+  color: inherit;
 }
 
 .account-chip:hover {
@@ -533,7 +558,7 @@ body.auth-open {
 }
 
 .auth-ok {
-  margin: 0;
+  margin: 0 0 0.75rem;
   color: #9dffc2;
   font-size: 0.9rem;
 }
@@ -542,70 +567,122 @@ body.auth-open {
   display: none;
 }
 
+#auth-forgot .auth-error {
+  margin: 0 0 0.75rem;
+}
+
 #auth-gate[hidden],
-#auth-profile[hidden],
-#auth-password[hidden] {
+#auth-password[hidden],
+#auth-forgot[hidden] {
   display: none;
 }
 
-.profile-card {
+.auth-text-link {
+  appearance: none;
+  border: 0;
+  background: none;
+  padding: 0;
+  margin: 0.15rem 0 0;
+  align-self: center;
+  font-family: var(--font-display);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  cursor: pointer;
+}
+
+.auth-text-link:hover {
+  color: #fff;
+}
+
+/* ===== PROFILE PAGE ===== */
+.page-profile {
+  min-height: 100dvh;
+}
+
+.profile-page {
+  position: relative;
+  z-index: 1;
+  min-height: 100dvh;
+}
+
+.profile-hero {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: clamp(5.5rem, 12vh, 7rem) clamp(1.25rem, 5vw, 3rem) 4rem;
+  text-align: center;
+}
+
+.profile-hero__body {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+  width: min(520px, 100%);
+}
+
+.profile-hero__body[hidden],
+.profile-hero__empty[hidden],
+.profile-hero__loading[hidden] {
+  display: none;
+}
+
+.profile-hero__empty {
+  display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 1rem;
-  margin: 0.25rem 0 1rem;
 }
 
-.profile-card__avatar,
-.profile-card__fallback {
-  width: 4.25rem;
-  height: 4.25rem;
+.profile-hero__avatar,
+.profile-hero__fallback {
+  width: clamp(7.5rem, 22vw, 11rem);
+  height: clamp(7.5rem, 22vw, 11rem);
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow:
+    0 0 0 1px rgba(126, 240, 255, 0.2),
+    0 20px 50px rgba(0, 0, 0, 0.45);
 }
 
-.profile-card__avatar {
+.profile-hero__avatar {
   object-fit: cover;
   background: rgba(0, 0, 0, 0.35);
 }
 
-.profile-card__fallback {
+.profile-hero__fallback {
   display: grid;
   place-items: center;
   font-family: var(--font-display);
-  font-size: 1.1rem;
-  letter-spacing: 0.06em;
+  font-size: clamp(1.6rem, 5vw, 2.4rem);
+  letter-spacing: 0.08em;
   color: #fff;
   background: linear-gradient(135deg, rgba(126, 240, 255, 0.45), rgba(167, 139, 255, 0.55));
 }
 
-.profile-card__avatar[hidden],
-.profile-card__fallback[hidden] {
+.profile-hero__avatar[hidden],
+.profile-hero__fallback[hidden] {
   display: none;
 }
 
-.profile-card__meta {
-  min-width: 0;
+.profile-hero__name {
+  margin: 0.35rem 0 0;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: 0.08em;
 }
 
-.profile-card__name {
-  margin: 0 0 0.25rem;
-  font-family: var(--font-display);
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #fff;
-}
-
-.profile-card__status,
-.profile-card__rep {
+.profile-hero__status,
+.profile-hero__rep,
+.profile-hero__loading {
   margin: 0;
-  font-size: 0.92rem;
+  font-size: 1.1rem;
 }
 
-.profile-card__rep {
-  margin-top: 0.35rem;
+.profile-hero__rep {
   opacity: 0.8;
 }
 
