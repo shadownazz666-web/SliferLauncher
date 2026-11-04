@@ -1,10 +1,12 @@
 # sliferlauncher.com (landing)
 
-Static one-page site: brand + pitch + Windows download CTA.
+Static one-page site: brand + pitch + Windows download CTA + Account (register/login).
 
 Download target:
 
 `https://github.com/shadownazz666-web/SliferLauncher/releases/latest/download/SliferLauncher_Setup.exe`
+
+Account uses the **same store-api accounts** as the Slifer launcher (`/auth/register-player`, `/auth/login`, `/auth/login-username`) via a same-origin `/api/` nginx proxy.
 
 ## Local preview
 
@@ -15,6 +17,8 @@ npx --yes serve -l 4173 .
 ```
 
 Open `http://127.0.0.1:4173`.
+
+Auth calls go to `/api/...`. For local login to work, either proxy `/api` to a running store-api, or test against the live site after deploy.
 
 ## Deploy on the store-api Linux host
 
@@ -58,6 +62,22 @@ sudo ln -sf /etc/nginx/sites-available/sliferlauncher.com /etc/nginx/sites-enabl
 sudo nginx -t && sudo systemctl reload nginx
 ```
 
+The example includes `/api/` → `http://127.0.0.1:8787/` (trailing slash strips the `/api` prefix). If the live site block already exists, merge that `location /api/` into the **443** server (and 80 if needed), then:
+
+```bash
+sudo nginx -t && sudo systemctl reload nginx
+```
+
+Smoke test:
+
+```bash
+curl -sS -o /dev/null -w "%{http_code}\n" -X POST https://sliferlauncher.com/api/auth/login \
+  -H 'content-type: application/json' \
+  -d '{"email":"test@example.com","password":"wrong"}'
+```
+
+Expect `401` JSON (proxy OK), not HTML/`502`.
+
 ### 4. HTTPS
 
 ```bash
@@ -67,6 +87,7 @@ sudo certbot --nginx -d sliferlauncher.com -d www.sliferlauncher.com
 Confirm:
 
 - `https://sliferlauncher.com` shows the landing page
+- Account → Sign in / Create account works with a launcher account
 - Store API URL still works as before
 - Password-reset mail DNS unchanged
 
