@@ -16,7 +16,7 @@
       href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Rajdhani:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/styles.css?v=3" />
+    <link rel="stylesheet" href="/styles.css?v=6" />
   </head>
   <body class="page-profile">
     <div id="y2k-bg" aria-hidden="true">
@@ -204,11 +204,17 @@
       <section class="profile-hero" id="profile-root">
         <p class="profile-hero__loading glass-text" id="profile-loading">Loading…</p>
         <div class="profile-hero__body" id="profile-body" hidden>
-          <img class="profile-hero__avatar" id="profile-avatar" alt="" hidden />
-          <span class="profile-hero__fallback" id="profile-fallback" hidden aria-hidden="true"></span>
-          <h1 class="profile-hero__name chrome-type" id="profile-name"></h1>
-          <p class="profile-hero__status glass-text" id="profile-status"></p>
-          <p class="profile-hero__rep glass-text" id="profile-rep">Rep — coming soon</p>
+          <div class="profile-hero__identity">
+            <div class="profile-hero__avatar-col">
+              <img class="profile-hero__avatar" id="profile-avatar" alt="" hidden />
+              <span class="profile-hero__fallback" id="profile-fallback" hidden aria-hidden="true"></span>
+              <p class="profile-hero__rep" id="profile-rep" hidden></p>
+            </div>
+            <div class="profile-hero__meta">
+              <h1 class="profile-hero__name chrome-type" id="profile-name"></h1>
+              <p class="profile-hero__since glass-text" id="profile-since"></p>
+            </div>
+          </div>
         </div>
         <div class="profile-hero__empty" id="profile-empty" hidden>
           <p class="glass-text">Sign in to view your profile.</p>
@@ -220,9 +226,9 @@
       </section>
     </main>
 
-    <script src="/y2k-bg.js?v=3"></script>
-    <script src="/auth.js?v=3"></script>
-    <script src="/account.js?v=3"></script>
-    <script src="/profile.js?v=3"></script>
+    <script src="/y2k-bg.js?v=5"></script>
+    <script src="/auth.js?v=5"></script>
+    <script src="/account.js?v=5"></script>
+    <script src="/profile.js?v=6"></script>
   </body>
 </html>

@@ -1,4 +1,5 @@
 (() => {
+  // Same-origin /api — nginx in prod, website/dev-server.mjs locally.
   const API_BASE = "/api";
   const SESSION_KEY = "slifer.web.session";
   const DOWNLOAD_URL =
