@@ -10,6 +10,9 @@
   const nameEl = document.getElementById("profile-name");
   const roleEl = document.getElementById("profile-role");
   const sinceEl = document.getElementById("profile-since");
+  const actionsEl = document.getElementById("profile-actions");
+  const staffBtn = document.getElementById("profile-staff");
+  const devBtn = document.getElementById("profile-dev");
   const repEl = document.getElementById("profile-rep");
   const signInBtn = document.getElementById("profile-signin");
 
@@ -51,6 +54,9 @@
     if (!session?.user) {
       if (body) body.hidden = true;
       if (empty) empty.hidden = false;
+      if (actionsEl) actionsEl.hidden = true;
+      if (staffBtn) staffBtn.hidden = true;
+      if (devBtn) devBtn.hidden = true;
       return;
     }
     if (empty) empty.hidden = true;
@@ -62,6 +68,22 @@
       roleEl.textContent = A.roleLabel(role);
     }
     if (sinceEl) sinceEl.textContent = formatMemberSince(session.user);
+
+    const role = session.user?.role || "player";
+    const showStaff =
+      Boolean(session.user?.canReviewApps) || role === "owner" || role === "admin";
+    const showDev =
+      Boolean(session.user?.canUploadGames) ||
+      role === "dev" ||
+      role === "owner" ||
+      role === "admin";
+    if (staffBtn) staffBtn.hidden = !showStaff;
+    if (devBtn) {
+      devBtn.hidden = !showDev;
+      if (A.DEV_PORTAL_URL) devBtn.setAttribute("href", A.DEV_PORTAL_URL);
+    }
+    if (actionsEl) actionsEl.hidden = !(showStaff || showDev);
+
     paintRep(session.user);
     A.paintAvatarPair(avatar, fallback, session.user);
     document.title = `${A.displayName(session.user)} — Slifer`;

@@ -31,6 +31,8 @@ function serveStatic(req, res) {
   const url = new URL(req.url || "/", `http://${req.headers.host || "localhost"}`);
   let pathname = decodeURIComponent(url.pathname);
   if (pathname === "/profile") pathname = "/profile.html";
+  if (pathname === "/apply") pathname = "/apply.html";
+  if (pathname === "/staff") pathname = "/staff.html";
   if (pathname.endsWith("/")) pathname += "index.html";
 
   const filePath = path.normalize(path.join(__dirname, pathname));
@@ -52,9 +54,11 @@ function serveStatic(req, res) {
   });
 }
 
-function proxyApi(req, res) {
+/** Proxy to store-api. When stripApi, /api/foo → /foo. */
+function proxyToApi(req, res, { stripApi = false } = {}) {
   const url = new URL(req.url || "/", `http://${req.headers.host || "localhost"}`);
-  const targetPath = url.pathname.replace(/^\/api/, "") || "/";
+  let targetPath = url.pathname;
+  if (stripApi) targetPath = targetPath.replace(/^\/api/, "") || "/";
   const target = new URL(targetPath + url.search, API_ORIGIN);
 
   const headers = { ...req.headers, host: target.host };
@@ -82,9 +86,23 @@ function proxyApi(req, res) {
   req.pipe(upstream);
 }
 
+function shouldProxyPassthrough(pathname) {
+  return (
+    pathname === "/dev" ||
+    pathname.startsWith("/dev/") ||
+    pathname.startsWith("/auth/") ||
+    pathname.startsWith("/store/")
+  );
+}
+
 const server = http.createServer((req, res) => {
-  if ((req.url || "").startsWith("/api/") || (req.url || "") === "/api") {
-    proxyApi(req, res);
+  const pathname = new URL(req.url || "/", "http://localhost").pathname;
+  if (pathname.startsWith("/api/") || pathname === "/api") {
+    proxyToApi(req, res, { stripApi: true });
+    return;
+  }
+  if (shouldProxyPassthrough(pathname)) {
+    proxyToApi(req, res);
     return;
   }
   serveStatic(req, res);
@@ -93,4 +111,5 @@ const server = http.createServer((req, res) => {
 server.listen(PORT, "127.0.0.1", () => {
   console.log(`[website-dev] http://127.0.0.1:${PORT}`);
   console.log(`[website-dev] /api → ${API_ORIGIN}`);
+  console.log(`[website-dev] /dev /auth /store → ${API_ORIGIN}`);
 });

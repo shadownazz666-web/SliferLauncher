@@ -1,6 +1,8 @@
 (() => {
   // Same-origin /api — nginx in prod, website/dev-server.mjs locally.
   const API_BASE = "/api";
+  /** Same-origin portal — nginx / local preview proxy → store-api /dev. */
+  const DEV_PORTAL_URL = "/dev";
   const SESSION_KEY = "slifer.web.session";
   const DOWNLOAD_URL =
     "https://github.com/shadownazz666-web/SliferLauncher/releases/latest/download/SliferLauncher_Setup.exe";
@@ -158,6 +160,7 @@
 
   window.SliferAuth = {
     API_BASE,
+    DEV_PORTAL_URL,
     DOWNLOAD_URL,
     loadSession,
     saveSession,

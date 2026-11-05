@@ -11,6 +11,7 @@
   const accountRole = document.getElementById("account-role");
   const menuApply = document.getElementById("menu-apply");
   const menuStaff = document.getElementById("menu-staff");
+  const menuDev = document.getElementById("menu-dev");
   const overlay = document.getElementById("auth-overlay");
   const closeBtn = document.getElementById("auth-close");
   const titleEl = document.getElementById("auth-title");
@@ -90,6 +91,10 @@
       if (menuStaff) {
         menuStaff.hidden = !session.user?.canReviewApps;
       }
+      if (menuDev) {
+        menuDev.hidden = !session.user?.canUploadGames;
+        if (A.DEV_PORTAL_URL) menuDev.setAttribute("href", A.DEV_PORTAL_URL);
+      }
       A.paintAvatarPair(accountAvatar, accountFallback, session.user);
     } else {
       delete accountBtn.dataset.signedIn;
@@ -110,6 +115,7 @@
       }
       if (menuApply) menuApply.hidden = true;
       if (menuStaff) menuStaff.hidden = true;
+      if (menuDev) menuDev.hidden = true;
       if (accountAvatar) {
         accountAvatar.hidden = true;
         accountAvatar.removeAttribute("src");

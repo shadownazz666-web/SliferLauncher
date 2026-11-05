@@ -16,7 +16,7 @@
       href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Rajdhani:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/styles.css?v=7" />
+    <link rel="stylesheet" href="/styles.css?v=8" />
   </head>
   <body class="page-profile">
     <div id="y2k-bg" aria-hidden="true">
@@ -71,6 +71,9 @@
         </a>
         <a class="account-menu__item" role="menuitem" href="/staff.html" id="menu-staff" hidden>
           Staff desk
+        </a>
+        <a class="account-menu__item" role="menuitem" href="/dev" id="menu-dev" hidden>
+          Dev portal
         </a>
         <a
           class="account-menu__item"
@@ -221,6 +224,16 @@
               <h1 class="profile-hero__name chrome-type" id="profile-name"></h1>
               <p class="profile-hero__role" id="profile-role" hidden></p>
               <p class="profile-hero__since glass-text" id="profile-since"></p>
+              <div class="profile-hero__actions" id="profile-actions" hidden>
+                <a class="cta cta-glow profile-action" id="profile-staff" href="/staff.html" hidden>
+                  <span class="cta__label">Staff desk</span>
+                  <span class="cta__shine" aria-hidden="true"></span>
+                </a>
+                <a class="cta cta-glow profile-action" id="profile-dev" href="/dev" hidden>
+                  <span class="cta__label">Dev portal</span>
+                  <span class="cta__shine" aria-hidden="true"></span>
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -235,8 +248,8 @@
     </main>
 
     <script src="/y2k-bg.js?v=5"></script>
-    <script src="/auth.js?v=7"></script>
-    <script src="/account.js?v=7"></script>
-    <script src="/profile.js?v=7"></script>
+    <script src="/auth.js?v=8"></script>
+    <script src="/account.js?v=8"></script>
+    <script src="/profile.js?v=8"></script>
   </body>
 </html>

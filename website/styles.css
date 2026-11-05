@@ -1620,3 +1620,22 @@ body.auth-open {
 .profile-hero__role[hidden] {
   display: none;
 }
+
+.profile-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.15rem;
+}
+
+.profile-hero__actions[hidden] {
+  display: none !important;
+}
+
+.profile-action {
+  text-decoration: none;
+}
+
+.profile-action[hidden] {
+  display: none !important;
+}
