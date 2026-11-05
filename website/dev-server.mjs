@@ -91,7 +91,8 @@ function shouldProxyPassthrough(pathname) {
     pathname === "/dev" ||
     pathname.startsWith("/dev/") ||
     pathname.startsWith("/auth/") ||
-    pathname.startsWith("/store/")
+    pathname.startsWith("/store/") ||
+    pathname.startsWith("/staff/")
   );
 }
 
@@ -111,5 +112,5 @@ const server = http.createServer((req, res) => {
 server.listen(PORT, "127.0.0.1", () => {
   console.log(`[website-dev] http://127.0.0.1:${PORT}`);
   console.log(`[website-dev] /api → ${API_ORIGIN}`);
-  console.log(`[website-dev] /dev /auth /store → ${API_ORIGIN}`);
+  console.log(`[website-dev] /dev /auth /store /staff → ${API_ORIGIN}`);
 });
