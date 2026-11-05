@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Apply as Developer — Slifer</title>
+    <meta
+      name="description"
+      content="Apply for Slifer developer access. Ship games to the store with a reviewed application."
+    />
+    <meta property="og:title" content="Apply as Developer — Slifer" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://sliferlauncher.com/apply.html" />
+    <meta property="og:image" content="https://sliferlauncher.com/assets/slifer-logo.png" />
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Rajdhani:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css?v=7" />
+  </head>
+  <body class="page-desk">
+    <div id="y2k-bg" aria-hidden="true">
+      <canvas class="chrome"></canvas>
+      <div class="vignette"></div>
+      <canvas class="stars"></canvas>
+      <div class="grain"></div>
+    </div>
+
+    <header class="top glass-chip">
+      <a class="top__mark top__mark--link" href="/">SLIFER</a>
+      <a class="top__link glass-text" href="/">Home</a>
+    </header>
+
+    <div class="account-wrap">
+      <button
+        type="button"
+        class="account-chip glass-chip"
+        id="account-btn"
+        aria-haspopup="menu"
+        aria-expanded="false"
+        aria-controls="account-menu"
+        aria-label="Account"
+      >
+        <span class="account-chip__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
+            <circle cx="12" cy="8" r="3.5" stroke="currentColor" stroke-width="1.6" />
+            <path
+              d="M5 19.5c1.6-3.2 4-4.8 7-4.8s5.4 1.6 7 4.8"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+            />
+          </svg>
+        </span>
+        <img class="account-chip__avatar" id="account-avatar" alt="" hidden />
+        <span class="account-chip__fallback" id="account-fallback" hidden aria-hidden="true"></span>
+        <span class="account-chip__name" id="account-name" hidden></span>
+      </button>
+
+      <div class="account-menu glass-panel" id="account-menu" role="menu" hidden>
+        <p class="account-menu__email" id="account-email" hidden></p>
+        <p class="account-menu__role" id="account-role" hidden></p>
+        <a class="account-menu__item" role="menuitem" href="/profile.html">View profile</a>
+        <a class="account-menu__item" role="menuitem" href="/apply.html" id="menu-apply" hidden>
+          Apply as developer
+        </a>
+        <a class="account-menu__item" role="menuitem" href="/staff.html" id="menu-staff" hidden>
+          Staff desk
+        </a>
+        <a
+          class="account-menu__item"
+          role="menuitem"
+          href="https://github.com/shadownazz666-web/SliferLauncher/releases/latest/download/SliferLauncher_Setup.exe"
+        >
+          Download launcher
+        </a>
+        <button type="button" class="account-menu__item" role="menuitem" data-account-action="password">
+          Change password
+        </button>
+        <button type="button" class="account-menu__item" role="menuitem" data-account-action="forgot">
+          Forgot password
+        </button>
+        <button
+          type="button"
+          class="account-menu__item account-menu__item--danger"
+          role="menuitem"
+          data-account-action="signout"
+        >
+          Sign out
+        </button>
+      </div>
+    </div>
+
+    <div class="auth-overlay" id="auth-overlay" hidden>
+      <div class="auth-modal glass-panel" role="dialog" aria-modal="true" aria-labelledby="auth-title">
+        <button type="button" class="auth-modal__close" id="auth-close" aria-label="Close">×</button>
+        <div id="auth-gate">
+          <div class="auth-tabs" role="tablist">
+            <button type="button" class="auth-tab is-active" role="tab" data-auth-tab="login" aria-selected="true">
+              Sign in
+            </button>
+            <button type="button" class="auth-tab" role="tab" data-auth-tab="register" aria-selected="false">
+              Register
+            </button>
+          </div>
+          <h2 class="auth-modal__title chrome-type" id="auth-title">Welcome back</h2>
+          <p class="auth-modal__hint glass-text">Same account as the launcher.</p>
+          <form class="auth-form" id="auth-login" autocomplete="on">
+            <label class="auth-field">
+              <span>Email or username</span>
+              <input name="identifier" type="text" required autocomplete="username" />
+            </label>
+            <label class="auth-field">
+              <span>Password</span>
+              <input name="password" type="password" required autocomplete="current-password" minlength="6" />
+            </label>
+            <p class="auth-error" id="login-error" hidden></p>
+            <button type="submit" class="cta cta-glow auth-submit">
+              <span class="cta__label">Sign in</span>
+              <span class="cta__shine" aria-hidden="true"></span>
+            </button>
+            <button type="button" class="auth-text-link" data-open-forgot>Forgot password</button>
+          </form>
+          <form class="auth-form" id="auth-register" hidden autocomplete="on">
+            <label class="auth-field">
+              <span>Username</span>
+              <input name="username" type="text" required minlength="3" maxlength="24" autocomplete="username" />
+            </label>
+            <label class="auth-field">
+              <span>Email</span>
+              <input name="email" type="email" required autocomplete="email" />
+            </label>
+            <label class="auth-field">
+              <span>Password</span>
+              <input name="password" type="password" required autocomplete="new-password" minlength="6" />
+            </label>
+            <p class="auth-error" id="register-error" hidden></p>
+            <button type="submit" class="cta cta-glow auth-submit">
+              <span class="cta__label">Create account</span>
+              <span class="cta__shine" aria-hidden="true"></span>
+            </button>
+          </form>
+        </div>
+        <div id="auth-password" hidden>
+          <h2 class="auth-modal__title chrome-type">Change password</h2>
+          <form class="auth-form" id="auth-password-form" autocomplete="on">
+            <label class="auth-field">
+              <span>Email</span>
+              <input name="email" type="email" required autocomplete="email" />
+            </label>
+            <label class="auth-field">
+              <span>Current password</span>
+              <input name="currentPassword" type="password" required autocomplete="current-password" minlength="1" />
+            </label>
+            <label class="auth-field">
+              <span>New password</span>
+              <input name="newPassword" type="password" required autocomplete="new-password" minlength="6" />
+            </label>
+            <p class="auth-error" id="password-error" hidden></p>
+            <p class="auth-ok" id="password-ok" hidden></p>
+            <button type="submit" class="cta cta-glow auth-submit">
+              <span class="cta__label">Update password</span>
+              <span class="cta__shine" aria-hidden="true"></span>
+            </button>
+          </form>
+        </div>
+        <div id="auth-forgot" hidden>
+          <h2 class="auth-modal__title chrome-type">Forgot password</h2>
+          <p class="auth-error" id="forgot-error" hidden></p>
+          <p class="auth-ok" id="forgot-ok" hidden></p>
+          <form class="auth-form" id="auth-forgot-request" autocomplete="on">
+            <label class="auth-field">
+              <span>Email</span>
+              <input name="email" type="email" required autocomplete="email" />
+            </label>
+            <button type="submit" class="cta cta-glow auth-submit">
+              <span class="cta__label">Send code</span>
+              <span class="cta__shine" aria-hidden="true"></span>
+            </button>
+          </form>
+          <form class="auth-form" id="auth-forgot-reset" hidden autocomplete="on">
+            <label class="auth-field">
+              <span>Email</span>
+              <input name="email" type="email" required autocomplete="email" />
+            </label>
+            <label class="auth-field">
+              <span>Code</span>
+              <input name="code" type="text" required autocomplete="one-time-code" minlength="4" maxlength="12" />
+            </label>
+            <label class="auth-field">
+              <span>New password</span>
+              <input name="newPassword" type="password" required autocomplete="new-password" minlength="6" />
+            </label>
+            <button type="submit" class="cta cta-glow auth-submit">
+              <span class="cta__label">Reset password</span>
+              <span class="cta__shine" aria-hidden="true"></span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <main class="desk">
+      <section class="desk__intro" data-reveal>
+        <p class="glass-kicker glass-text">Developer access</p>
+        <h1 class="desk__brand chrome-type">Apply</h1>
+        <p class="desk__lede glass-text">
+          Tell us what you’re building. Owner and Admins review every application — no open self-serve
+          uploads.
+        </p>
+      </section>
+
+      <section class="desk__panel glass-panel" id="apply-gate" hidden>
+        <p class="glass-text">Sign in with your Slifer account to apply.</p>
+        <button type="button" class="cta cta-glow" id="apply-signin">
+          <span class="cta__label">Sign in</span>
+          <span class="cta__shine" aria-hidden="true"></span>
+        </button>
+      </section>
+
+      <section class="desk__panel glass-panel" id="apply-status" hidden>
+        <div class="status-card" id="apply-status-inner"></div>
+      </section>
+
+      <section class="desk__panel glass-panel" id="apply-form-wrap" hidden>
+        <form class="desk-form" id="apply-form" autocomplete="on">
+          <label class="auth-field">
+            <span>Studio / display name</span>
+            <input name="displayName" type="text" required maxlength="64" autocomplete="organization" />
+          </label>
+          <label class="auth-field">
+            <span>Contact email</span>
+            <input name="contactEmail" type="email" required maxlength="120" autocomplete="email" />
+          </label>
+          <label class="auth-field">
+            <span>Portfolio or site <em class="field-opt">(optional)</em></span>
+            <input name="portfolioUrl" type="url" maxlength="300" placeholder="https://" autocomplete="url" />
+          </label>
+          <label class="auth-field">
+            <span>Pitch</span>
+            <textarea
+              name="pitch"
+              required
+              minlength="20"
+              maxlength="2000"
+              rows="6"
+              placeholder="What you’re shipping, platforms, and why Slifer fits."
+            ></textarea>
+          </label>
+          <p class="auth-error" id="apply-error" hidden></p>
+          <button type="submit" class="cta cta-glow auth-submit" id="apply-submit">
+            <span class="cta__label">Submit application</span>
+            <span class="cta__shine" aria-hidden="true"></span>
+          </button>
+        </form>
+      </section>
+    </main>
+
+    <script src="/y2k-bg.js?v=5"></script>
+    <script src="/auth.js?v=7"></script>
+    <script src="/account.js?v=7"></script>
+    <script src="/apply.js?v=1"></script>
+  </body>
+</html>

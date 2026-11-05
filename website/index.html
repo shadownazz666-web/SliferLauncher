@@ -23,7 +23,7 @@
       href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Rajdhani:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/styles.css?v=5" />
+    <link rel="stylesheet" href="/styles.css?v=7" />
   </head>
   <body>
     <div id="y2k-bg" aria-hidden="true">
@@ -70,7 +70,14 @@
 
       <div class="account-menu glass-panel" id="account-menu" role="menu" hidden>
         <p class="account-menu__email" id="account-email" hidden></p>
+        <p class="account-menu__role" id="account-role" hidden></p>
         <a class="account-menu__item" role="menuitem" href="/profile.html">View profile</a>
+        <a class="account-menu__item" role="menuitem" href="/apply.html" id="menu-apply" hidden>
+          Apply as developer
+        </a>
+        <a class="account-menu__item" role="menuitem" href="/staff.html" id="menu-staff" hidden>
+          Staff desk
+        </a>
         <a
           class="account-menu__item"
           role="menuitem"
@@ -295,8 +302,8 @@
     </footer>
 
     <script src="/y2k-bg.js?v=5"></script>
-    <script src="/auth.js?v=5"></script>
-    <script src="/account.js?v=5"></script>
+    <script src="/auth.js?v=7"></script>
+    <script src="/account.js?v=7"></script>
     <script src="/site.js?v=5"></script>
   </body>
 </html>

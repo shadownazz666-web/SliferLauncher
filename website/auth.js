@@ -121,13 +121,39 @@
           status: data.user.status ?? next.status,
           activity: data.user.activity ?? next.activity ?? null,
           email: data.user.email ?? next.email,
+          role: data.user.role ?? next.role,
         };
       }
     } catch {
       // keep existing session payload
     }
+    try {
+      const caps = await apiFetch("/staff/me", { token });
+      next = {
+        ...next,
+        role: caps.role ?? next.role,
+        canReviewApps: Boolean(caps.canReviewApps),
+        canManageStaff: Boolean(caps.canManageStaff),
+        canUploadGames: Boolean(caps.canUploadGames),
+      };
+    } catch {
+      // older API — derive from role
+      const role = next.role || "player";
+      next.canReviewApps = role === "owner" || role === "admin";
+      next.canManageStaff = role === "owner";
+      next.canUploadGames =
+        role === "owner" || role === "admin" || role === "dev";
+    }
     saveSession(token, next);
     return next;
+  }
+
+  function roleLabel(role) {
+    if (role === "owner") return "Owner";
+    if (role === "admin") return "Admin";
+    if (role === "mod") return "Moderator";
+    if (role === "dev") return "Developer";
+    return "Player";
   }
 
   window.SliferAuth = {
@@ -143,5 +169,6 @@
     paintAvatarPair,
     apiFetch,
     enrichSession,
+    roleLabel,
   };
 })();

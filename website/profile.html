@@ -16,7 +16,7 @@
       href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Rajdhani:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/styles.css?v=6" />
+    <link rel="stylesheet" href="/styles.css?v=7" />
   </head>
   <body class="page-profile">
     <div id="y2k-bg" aria-hidden="true">
@@ -64,7 +64,14 @@
 
       <div class="account-menu glass-panel" id="account-menu" role="menu" hidden>
         <p class="account-menu__email" id="account-email" hidden></p>
+        <p class="account-menu__role" id="account-role" hidden></p>
         <a class="account-menu__item" role="menuitem" href="/profile.html">View profile</a>
+        <a class="account-menu__item" role="menuitem" href="/apply.html" id="menu-apply" hidden>
+          Apply as developer
+        </a>
+        <a class="account-menu__item" role="menuitem" href="/staff.html" id="menu-staff" hidden>
+          Staff desk
+        </a>
         <a
           class="account-menu__item"
           role="menuitem"
@@ -212,6 +219,7 @@
             </div>
             <div class="profile-hero__meta">
               <h1 class="profile-hero__name chrome-type" id="profile-name"></h1>
+              <p class="profile-hero__role" id="profile-role" hidden></p>
               <p class="profile-hero__since glass-text" id="profile-since"></p>
             </div>
           </div>
@@ -227,8 +235,8 @@
     </main>
 
     <script src="/y2k-bg.js?v=5"></script>
-    <script src="/auth.js?v=5"></script>
-    <script src="/account.js?v=5"></script>
-    <script src="/profile.js?v=6"></script>
+    <script src="/auth.js?v=7"></script>
+    <script src="/account.js?v=7"></script>
+    <script src="/profile.js?v=7"></script>
   </body>
 </html>

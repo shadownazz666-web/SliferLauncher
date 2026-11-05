@@ -8,6 +8,7 @@
   const avatar = document.getElementById("profile-avatar");
   const fallback = document.getElementById("profile-fallback");
   const nameEl = document.getElementById("profile-name");
+  const roleEl = document.getElementById("profile-role");
   const sinceEl = document.getElementById("profile-since");
   const repEl = document.getElementById("profile-rep");
   const signInBtn = document.getElementById("profile-signin");
@@ -55,6 +56,11 @@
     if (empty) empty.hidden = true;
     if (body) body.hidden = false;
     if (nameEl) nameEl.textContent = A.displayName(session.user);
+    if (roleEl) {
+      const role = session.user?.role || "player";
+      roleEl.hidden = false;
+      roleEl.textContent = A.roleLabel(role);
+    }
     if (sinceEl) sinceEl.textContent = formatMemberSince(session.user);
     paintRep(session.user);
     A.paintAvatarPair(avatar, fallback, session.user);

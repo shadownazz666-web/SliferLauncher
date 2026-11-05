@@ -8,6 +8,9 @@
   const accountFallback = document.getElementById("account-fallback");
   const accountName = document.getElementById("account-name");
   const accountEmail = document.getElementById("account-email");
+  const accountRole = document.getElementById("account-role");
+  const menuApply = document.getElementById("menu-apply");
+  const menuStaff = document.getElementById("menu-staff");
   const overlay = document.getElementById("auth-overlay");
   const closeBtn = document.getElementById("auth-close");
   const titleEl = document.getElementById("auth-title");
@@ -73,6 +76,20 @@
         accountEmail.hidden = !email;
         accountEmail.textContent = email;
       }
+      if (accountRole) {
+        const role = session.user?.role || "player";
+        accountRole.hidden = false;
+        accountRole.textContent = A.roleLabel(role);
+      }
+      if (menuApply) {
+        const role = session.user?.role || "player";
+        const showApply =
+          role === "player" || role === "mod";
+        menuApply.hidden = !showApply;
+      }
+      if (menuStaff) {
+        menuStaff.hidden = !session.user?.canReviewApps;
+      }
       A.paintAvatarPair(accountAvatar, accountFallback, session.user);
     } else {
       delete accountBtn.dataset.signedIn;
@@ -87,6 +104,12 @@
         accountEmail.hidden = true;
         accountEmail.textContent = "";
       }
+      if (accountRole) {
+        accountRole.hidden = true;
+        accountRole.textContent = "";
+      }
+      if (menuApply) menuApply.hidden = true;
+      if (menuStaff) menuStaff.hidden = true;
       if (accountAvatar) {
         accountAvatar.hidden = true;
         accountAvatar.removeAttribute("src");
@@ -159,8 +182,17 @@
     closeMenu();
     closeOverlay();
     refreshAccountChrome();
-    if (location.pathname.endsWith("/profile.html") || location.pathname.endsWith("/profile")) {
-      location.href = "/";
+    window.dispatchEvent(new CustomEvent("slifer:session", { detail: null }));
+    const path = location.pathname;
+    if (
+      path.endsWith("/profile.html") ||
+      path.endsWith("/profile") ||
+      path.endsWith("/staff.html") ||
+      path.endsWith("/staff") ||
+      path.endsWith("/apply.html") ||
+      path.endsWith("/apply")
+    ) {
+      // Stay on page — gate UI reloads via session event / refresh.
     }
   }
 
@@ -251,6 +283,7 @@
       await A.enrichSession(data.token, data.user);
       refreshAccountChrome();
       closeOverlay();
+      window.dispatchEvent(new CustomEvent("slifer:session", { detail: A.loadSession() }));
     } catch (err) {
       showError(loginError, err instanceof Error ? err.message : String(err));
     } finally {
@@ -275,6 +308,7 @@
       await A.enrichSession(data.token, data.user);
       refreshAccountChrome();
       closeOverlay();
+      window.dispatchEvent(new CustomEvent("slifer:session", { detail: A.loadSession() }));
     } catch (err) {
       showError(registerError, err instanceof Error ? err.message : String(err));
     } finally {
