@@ -88,12 +88,15 @@
           role === "player" || role === "mod";
         menuApply.hidden = !showApply;
       }
-      if (menuStaff) {
-        menuStaff.hidden = !session.user?.canReviewApps;
-      }
-      if (menuDev) {
-        menuDev.hidden = !session.user?.canUploadGames;
-        if (A.DEV_PORTAL_URL) menuDev.setAttribute("href", A.DEV_PORTAL_URL);
+      {
+        const role = String(session.user?.role || "player").toLowerCase();
+        const staffOk = role === "owner" || role === "admin";
+        const devOk = role === "dev" || role === "owner" || role === "admin";
+        if (menuStaff) menuStaff.hidden = !staffOk;
+        if (menuDev) {
+          menuDev.hidden = !devOk;
+          if (A.DEV_PORTAL_URL) menuDev.setAttribute("href", A.DEV_PORTAL_URL);
+        }
       }
       A.paintAvatarPair(accountAvatar, accountFallback, session.user);
     } else {

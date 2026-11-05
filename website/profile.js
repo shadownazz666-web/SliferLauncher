@@ -69,14 +69,10 @@
     }
     if (sinceEl) sinceEl.textContent = formatMemberSince(session.user);
 
-    const role = session.user?.role || "player";
-    const showStaff =
-      Boolean(session.user?.canReviewApps) || role === "owner" || role === "admin";
-    const showDev =
-      Boolean(session.user?.canUploadGames) ||
-      role === "dev" ||
-      role === "owner" ||
-      role === "admin";
+    const role = String(session.user?.role || "player").toLowerCase();
+    // Players / mods never see these — only the matching role tags.
+    const showStaff = role === "owner" || role === "admin";
+    const showDev = role === "dev" || role === "owner" || role === "admin";
     if (staffBtn) staffBtn.hidden = !showStaff;
     if (devBtn) {
       devBtn.hidden = !showDev;
